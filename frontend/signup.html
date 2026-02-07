@@ -347,63 +347,7 @@
         </div>
     </div>
 
-    <script>
-        // Form validation
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const email = document.getElementById('email').value;
-            const fullname = document.getElementById('fullname').value;
-
-            // Reset error states
-            document.querySelectorAll('input').forEach(input => {
-                input.classList.remove('error');
-            });
-            document.querySelectorAll('.error-message').forEach(msg => msg.remove());
-
-            // Validate passwords match
-            if (password !== confirmPassword) {
-                const confirmInput = document.getElementById('confirm-password');
-                confirmInput.classList.add('error');
-                const errorMsg = document.createElement('div');
-                errorMsg.className = 'error-message';
-                errorMsg.textContent = 'Passwords do not match';
-                confirmInput.parentElement.appendChild(errorMsg);
-                return;
-            }
-
-            // Validate password strength (minimum 6 characters)
-            if (password.length < 6) {
-                const passwordInput = document.getElementById('password');
-                passwordInput.classList.add('error');
-                const errorMsg = document.createElement('div');
-                errorMsg.className = 'error-message';
-                errorMsg.textContent = 'Password must be at least 6 characters';
-                passwordInput.parentElement.appendChild(errorMsg);
-                return;
-            }
-
-            // If validation passes
-            console.log('Form submitted:', { fullname, email, password });
-            alert('Account created successfully! (Demo)');
-            
-            // In a real application, you would send this data to your backend
-            // window.location.href = 'dashboard.html';
-        });
-
-        // Real-time password match validation
-        document.getElementById('confirm-password').addEventListener('input', function() {
-            const password = document.getElementById('password').value;
-            const confirmPassword = this.value;
-            
-            if (confirmPassword && password !== confirmPassword) {
-                this.classList.add('error');
-            } else {
-                this.classList.remove('error');
-            }
-        });
-    </script>
+    <script src="js/config.js"></script>
+    <script src="js/signup.js"></script>
 </body>
 </html>

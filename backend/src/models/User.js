@@ -2,10 +2,22 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: String,
-    email: { type: String, unique: true },
-    password: String,
+    name: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
 
+    // Profile fields
+    bio: { type: String, default: "" },
+    skills: [{ type: String }],
+    availability: { type: String, default: "" },
+    projects: [{ type: String }],
+    
+    contact: {
+      mobile: { type: String, default: "" },
+      linkedin: { type: String, default: "" }
+    },
+
+    // User status
     role: {
       type: String,
       enum: ["user", "admin"],
@@ -17,6 +29,9 @@ const userSchema = new mongoose.Schema(
       enum: ["active", "suspended", "banned"],
       default: "active",
     },
+
+    // Profile completion
+    isProfileComplete: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

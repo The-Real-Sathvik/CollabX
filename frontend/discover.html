@@ -234,6 +234,14 @@
             background: var(--color-tag-bg);
             border-radius: 50%;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .partner-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .partner-info h3 {
@@ -371,10 +379,11 @@
 
         <!-- Grid -->
         <div class="partners-grid">
-            <!-- Card 1: Alex Morgan -->
             <div class="partner-card">
                 <div class="card-header">
-                    <div class="partner-avatar"></div>
+                    <div class="partner-avatar">
+                        <img src="images/avatar1.jpg" alt="Alex Morgan">
+                    </div>
                     <div class="partner-info">
                         <h3>Alex Morgan</h3>
                         <p>Availability: Weekends</p>
@@ -388,11 +397,11 @@
                 </div>
                 <div class="card-links">
                     <a href="#" class="card-link">
-                        <i data-lucide="globe" size="14"></i>
+                        <i data-lucide="globe"></i>
                         collabx.app
                     </a>
                     <a href="#" class="card-link">
-                        <i data-lucide="github" size="14"></i>
+                        <i data-lucide="github"></i>
                         github.com/alex/portfolio
                     </a>
                 </div>
@@ -401,10 +410,11 @@
                 </div>
             </div>
 
-            <!-- Card 2: Sarah Chen -->
             <div class="partner-card">
                 <div class="card-header">
-                    <div class="partner-avatar"></div>
+                    <div class="partner-avatar">
+                        <img src="images/avatar2.jpg" alt="Sarah Chen">
+                    </div>
                     <div class="partner-info">
                         <h3>Sarah Chen</h3>
                         <p>Availability: Evenings & Weekends</p>
@@ -417,7 +427,7 @@
                 </div>
                 <div class="card-links">
                     <a href="#" class="card-link">
-                        <i data-lucide="dribbble" size="14"></i>
+                        <i data-lucide="dribbble"></i>
                         dribbble.com/sarah
                     </a>
                 </div>
@@ -426,10 +436,11 @@
                 </div>
             </div>
 
-            <!-- Card 3: Jordan Smith -->
             <div class="partner-card">
                 <div class="card-header">
-                    <div class="partner-avatar"></div>
+                    <div class="partner-avatar">
+                         <img src="images/avatar3.jpg" alt="Jordan Smith">
+                    </div>
                     <div class="partner-info">
                         <h3>Jordan Smith</h3>
                         <p>Availability: Full-time</p>
@@ -443,11 +454,11 @@
                 </div>
                 <div class="card-links">
                     <a href="#" class="card-link">
-                        <i data-lucide="github" size="14"></i>
+                        <i data-lucide="github"></i>
                         github.com/jordan/ai-model
                     </a>
                     <a href="#" class="card-link">
-                        <i data-lucide="globe" size="14"></i>
+                        <i data-lucide="globe"></i>
                         jordan-ml.demo
                     </a>
                 </div>
@@ -456,10 +467,11 @@
                 </div>
             </div>
 
-            <!-- Card 4: Emily Davis -->
             <div class="partner-card">
                 <div class="card-header">
-                    <div class="partner-avatar"></div>
+                    <div class="partner-avatar">
+                         <img src="images/avatar4.jpg" alt="Emily Davis">
+                    </div>
                     <div class="partner-info">
                         <h3>Emily Davis</h3>
                         <p>Availability: Flexible</p>
@@ -473,7 +485,7 @@
                 </div>
                 <div class="card-links">
                     <a href="#" class="card-link">
-                        <i data-lucide="github" size="14"></i>
+                        <i data-lucide="github"></i>
                         github.com/emily/flutter-app
                     </a>
                 </div>
@@ -484,6 +496,8 @@
         </div>
     </main>
 
+    <script src="js/config.js"></script>
+    <script src="js/discover.js"></script>
     <script>
         lucide.createIcons();
     </script>

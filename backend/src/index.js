@@ -1,21 +1,13 @@
-import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import adminRoutes from "./routes/admin.routes.js";
-
-app.use("/api/admin", adminRoutes);
+import app from "./app.js";
 
 dotenv.config();
 
-connectDB(); // 
+connectDB();
 
-const app = express();
-app.use(express.json());
+const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.send("CollabX API running");
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
-
-app.listen(process.env.PORT, () =>
-  console.log(`🚀 Server running on port ${process.env.PORT}`)
-);
