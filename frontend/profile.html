@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile - CollabX</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --color-white: #FFFFFF;
+            --color-black: #000000;
+            --color-bg-dark: #18181B;
+            --color-bg-darker: #09090B;
+            --color-border: #27272A;
+            --color-border-light: rgba(39, 39, 42, 0.5);
+            --color-text-primary: #FFFFFF;
+            --color-text-secondary: #9F9FA9;
+            --color-text-muted: #71717B;
+            --color-placeholder: #52525C;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--color-black);
+            color: var(--color-white);
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background Image */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Logo */
+        .logo {
+            position: fixed;
+            top: 50px;
+            left: 61px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -2.5%;
+            color: var(--color-white);
+            z-index: 100;
+        }
+
+        /* Main Container */
+        .profile-container {
+            position: relative;
+            max-width: 896px;
+            margin: 32px auto;
+            background: var(--color-bg-dark);
+            border: 1px solid var(--color-border);
+            border-radius: 32px;
+            box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 1;
+        }
+
+        /* Header */
+        .profile-header {
+            padding: 49px 49px 0;
+            text-align: center;
+        }
+
+        .profile-header h1 {
+            font-size: 30px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--color-white);
+            margin-bottom: 8px;
+        }
+
+        .profile-header p {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.43;
+        }
+
+        /* Form Container */
+        .form-container {
+            padding: 65px 65px 48px;
+        }
+
+        .form-section {
+            margin-bottom: 48px;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--color-white);
+        }
+
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 24px;
+        }
+
+        .section-header-row h2 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--color-white);
+        }
+
+        .privacy-note {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            line-height: 1.33;
+        }
+
+        /* Form Fields */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 0;
+        }
+
+        .form-row-single {
+            display: block;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            line-height: 1.43;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--color-bg-darker);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            font-size: 16px;
+            color: var(--color-white);
+            font-family: Arial, sans-serif;
+            line-height: 1.15;
+            transition: all 0.3s;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--color-placeholder);
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-white);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        input:hover,
+        textarea:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 54px;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            font-size: 14px;
+            color: var(--color-white);
+        }
+
+        .skill-tag button {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .skill-tag button:hover {
+            color: var(--color-white);
+        }
+
+        /* Add Button */
+        .add-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 12px;
+            transition: color 0.3s;
+        }
+
+        .add-button:hover {
+            color: var(--color-white);
+        }
+
+        .add-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Project List */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .project-item {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .project-item input {
+            flex: 1;
+        }
+
+        .remove-button {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            font-size: 20px;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .remove-button:hover {
+            color: #DC2626;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            padding-top: 48px;
+            border-top: 1px solid var(--color-border-light);
+        }
+
+        .btn {
+            padding: 14px 32px;
+            font-size: 14px;
+            font-weight: 400;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            line-height: 1.43;
+        }
+
+        .btn-skip {
+            background: none;
+            color: var(--color-text-muted);
+        }
+
+        .btn-skip:hover {
+            color: var(--color-white);
+        }
+
+        .btn-primary {
+            background: var(--color-white);
+            color: var(--color-black);
+            font-weight: 700;
+            font-size: 16px;
+            padding: 14px 44px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 24px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .profile-container {
+                margin: 24px 24px;
+            }
+
+            .form-container {
+                padding: 48px 48px 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                left: 24px;
+                top: 24px;
+            }
+
+            .profile-container {
+                margin: 80px 16px 24px;
+                border-radius: 24px;
+            }
+
+            .profile-header {
+                padding: 32px 24px 0;
+            }
+
+            .form-container {
+                padding: 32px 24px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .btn,
+            .btn-primary {
+                width: 100%;
+            }
+        }
+
+        /* Success/Error messages */
+        .message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ADE80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #F87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image">
+        <div data-us-project="p7Ff6pfTrb5Gs59C7nLC" class="absolute w-full h-full left-0 top-0 -z-10" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; z-index: 0;"></div>
+    </div>
+    <div class="logo">CollabX</div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Create your profile</h1>
+            <p>This helps others discover and match with you</p>
+        </div>
+
+        <div class="form-container">
+            <form id="profileForm">
+                <!-- Basic Details Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2>Basic Details</h2>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input 
+                                type="text" 
+                                id="fullname" 
+                                name="fullname" 
+                                placeholder="Enter your full name"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="bio">Short Bio</label>
+                            <input 
+                                type="text" 
+                                id="bio" 
+                                name="bio" 
+                                placeholder="Briefly describe yourself (1–2 lines)"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2>Skills</h2>
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            id="skillInput" 
+                            placeholder="Add a skill and press enter"
+                        >
+                        <div class="skills-container" id="skillsContainer"></div>
+                    </div>
+                </div>
+
+                <!-- Projects Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2>Projects</h2>
+                    </div>
+                    <div class="project-list" id="projectList">
+                        <div class="project-item">
+                            <input 
+                                type="url" 
+                                name="project[]" 
+                                placeholder="GitHub Repo / Live Project Link"
+                            >
+                        </div>
+                    </div>
+                    <button type="button" class="add-button" id="addProjectBtn">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.33">
+                            <path d="M3.33 8h9.34M8 3.33v9.34"/>
+                        </svg>
+                        Add another project
+                    </button>
+                </div>
+
+                <!-- Availability Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2>Availability</h2>
+                    </div>
+                    <div class="form-group">
+                        <label for="availability">Availability</label>
+                        <input 
+                            type="text" 
+                            id="availability" 
+                            name="availability" 
+                            placeholder="Full-time / Weekends / Flexible"
+                        >
+                    </div>
+                </div>
+
+                <!-- Contact Details Section -->
+                <div class="form-section">
+                    <div class="section-header-row">
+                        <h2>Contact Details</h2>
+                        <span class="privacy-note">Visible only after a successful match</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number</label>
+                            <input 
+                                type="tel" 
+                                id="mobile" 
+                                name="mobile" 
+                                placeholder="Enter mobile number"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn Profile</label>
+                            <input 
+                                type="url" 
+                                id="linkedin" 
+                                name="linkedin" 
+                                placeholder="LinkedIn profile URL"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-skip" id="skipBtn">Skip for now</button>
+                    <button type="submit" class="btn btn-primary">Save & Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Skills Management
+        const skills = [];
+        const skillInput = document.getElementById('skillInput');
+        const skillsContainer = document.getElementById('skillsContainer');
+
+        function addSkill(skill) {
+            if (skill && !skills.includes(skill)) {
+                skills.push(skill);
+                renderSkills();
+            }
+        }
+
+        function removeSkill(skill) {
+            const index = skills.indexOf(skill);
+            if (index > -1) {
+                skills.splice(index, 1);
+                renderSkills();
+            }
+        }
+
+        function renderSkills() {
+            skillsContainer.innerHTML = skills.map(skill => `
+                <div class="skill-tag">
+                    <span>${skill}</span>
+                    <button type="button" onclick="removeSkill('${skill}')">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        skillInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const skill = this.value.trim();
+                if (skill) {
+                    addSkill(skill);
+                    this.value = '';
+                }
+            }
+        });
+
+        // Make removeSkill available globally
+        window.removeSkill = removeSkill;
+
+        // Project Management
+        let projectCount = 1;
+        const projectList = document.getElementById('projectList');
+        const addProjectBtn = document.getElementById('addProjectBtn');
+
+        addProjectBtn.addEventListener('click', function() {
+            projectCount++;
+            const projectItem = document.createElement('div');
+            projectItem.className = 'project-item';
+            projectItem.innerHTML = `
+                <input 
+                    type="url" 
+                    name="project[]" 
+                    placeholder="GitHub Repo / Live Project Link"
+                >
+                <button type="button" class="remove-button" onclick="removeProject(this)">&times;</button>
+            `;
+            projectList.appendChild(projectItem);
+        });
+
+        window.removeProject = function(button) {
+            if (projectList.children.length > 1) {
+                button.parentElement.remove();
+                projectCount--;
+            }
+        };
+
+        // Skip Button
+        document.getElementById('skipBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to skip profile creation? You can complete it later from your dashboard.')) {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Form Submission
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const profileData = {
+                fullname: formData.get('fullname'),
+                bio: formData.get('bio'),
+                skills: skills,
+                projects: formData.getAll('project[]').filter(p => p.trim() !== ''),
+                availability: formData.get('availability'),
+                mobile: formData.get('mobile'),
+                linkedin: formData.get('linkedin')
+            };
+
+            // Basic validation
+            if (!profileData.fullname) {
+                alert('Please enter your full name');
+                document.getElementById('fullname').focus();
+                return;
+            }
+
+            // Log the data (in production, send to backend)
+            console.log('Profile Data:', profileData);
+
+            // Show success message
+            const message = document.createElement('div');
+            message.className = 'message success';
+            message.textContent = 'Profile saved successfully!';
+            this.insertBefore(message, this.firstChild);
+
+            setTimeout(() => {
+                // Redirect to dashboard or next page
+                alert('Profile created successfully! (Demo)');
+                // window.location.href = 'dashboard.html';
+            }, 1500);
+        });
+
+        // Form validation helper
+        document.querySelectorAll('input[type="url"]').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value && !this.value.match(/^https?:\/\/.+/)) {
+                    this.setCustomValidity('Please enter a valid URL starting with http:// or https://');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+        });
+
+        document.querySelectorAll('input[type="tel"]').forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9+\-() ]/g, '');
+            });
+        });
+    </script>
+    <script type="text/javascript">
+      !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();
+    </script>
+</body>
+</html>
