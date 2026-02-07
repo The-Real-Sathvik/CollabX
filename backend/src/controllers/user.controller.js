@@ -7,6 +7,7 @@ export const getUsers = (req, res) => {
 
 export const getMe = (req, res) => {
   res.status(200).json({
-    message: "My profile API working"
+    message: "Authenticated user",
+    user: req.user
   });
 };

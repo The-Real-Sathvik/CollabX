@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { users } from "../data/fakeDB.js";
 
 // SIGN UP
@@ -42,14 +43,12 @@ export const signup = (req, res) => {
 export const login = (req, res) => {
   const { email, password } = req.body;
 
-  // Validation
   if (!email || !password) {
     return res.status(400).json({
       message: "Email and password are required"
     });
   }
 
-  // Find user
   const user = users.find(
     user => user.email === email && user.password === password
   );
@@ -60,11 +59,16 @@ export const login = (req, res) => {
     });
   }
 
+  // CREATE TOKEN
+  const token = jwt.sign(
+    { id: user.id, email: user.email },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" }
+  );
+
   return res.status(200).json({
     message: "Login successful",
-    user: {
-      id: user.id,
-      email: user.email
-    }
+    token
   });
 };
+
